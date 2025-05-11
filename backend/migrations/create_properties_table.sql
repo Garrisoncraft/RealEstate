@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS properties (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description VARCHAR(500) NOT NULL,
+  location VARCHAR(255) NOT NULL,
+  area FLOAT NOT NULL,
+  beds INT NOT NULL,
+  baths INT NOT NULL,
+  price DECIMAL(15, 2) NOT NULL,
+  rentOrSale ENUM('rent', 'sale') NOT NULL DEFAULT 'rent',
+  image VARCHAR(255),
+  userId INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+);
