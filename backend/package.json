@@ -11,6 +11,11 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "config": {
+    "production": {
+      "npm_config_omit": "dev"
+    }
+  },
   "keywords": [],
   "dependencies": {
     "bcrypt": "^5.1.1",
