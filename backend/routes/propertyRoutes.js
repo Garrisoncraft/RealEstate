@@ -3,8 +3,7 @@ const router = express.Router();
 const db = require('../db');
 const authenticateToken = require('../middleware/authenticateToken');
 const upload = require('../utils/multer');
-const cloudinary = require('../utils/cloudinary');
-const streamifier = require('streamifier');
+
 
 
 // Get all properties
