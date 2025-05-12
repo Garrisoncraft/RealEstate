@@ -21,7 +21,12 @@ export default function Footer() {
         sx={{ display: 'flex' }}
       >
         <Grid item xs={12} sm={4} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-          <img src={Logo} alt="Logo" style={{ width: 120, marginBottom: 16, display: 'block', marginLeft: 'auto', marginRight: 'auto', maxWidth: '100%' }} />
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'center', sm: 'flex-start' }, mb: 1 }}>
+            <img src={Logo} alt="Logo" style={{borderRadius: 50, width: 120, marginRight: 8, maxWidth: '100%' }} />
+            <Typography variant="h6" sx={{ mb: 0 }}>
+              CraftSpace
+            </Typography>
+          </Box>
           <Typography variant="body1" sx={{ mb: 2, maxWidth: 300, mx: { xs: 'auto', sm: 0 } }}>
             Stay connected, explore opportunities, and invest with confidence. Your real estate success starts here
           </Typography>

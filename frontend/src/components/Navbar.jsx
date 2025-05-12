@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Toolbar, Button, Box, IconButton, Menu, MenuItem} from "@mui/material";
+import { AppBar, Toolbar, Button, Box, IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo.png";
@@ -52,8 +52,11 @@ export default function Navbar() {
       <Toolbar className="max-w-7xl mx-auto w-full flex justify-between">
         {/* Left: Logo */}
         <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
-          <RouterLink to="/">
-            <img src={logo} alt="CraftSpace Logo" style={{ height: 40 }} />
+          <RouterLink to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+            <img src={logo} alt="CraftSpace Logo" style={{ borderRadius: 20, height: 40, marginRight: 8 }} />
+            <Typography variant="h6" sx={{ color: 'brown', fontWeight: 'bold', whiteSpace: 'nowrap' }}>
+              CraftSpace
+            </Typography>
           </RouterLink>
         </Box>
 
