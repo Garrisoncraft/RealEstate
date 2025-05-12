@@ -4,6 +4,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import Logo from '../assets/Logo.png';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -20,6 +21,7 @@ export default function Footer() {
         sx={{ display: 'flex' }}
       >
         <Grid item xs={12} sm={4} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+          <img src={Logo} alt="Logo" style={{ width: 120, marginBottom: 16, display: 'block', marginLeft: 'auto', marginRight: 'auto', maxWidth: '100%' }} />
           <Typography variant="body1" sx={{ mb: 2, maxWidth: 300, mx: { xs: 'auto', sm: 0 } }}>
             Stay connected, explore opportunities, and invest with confidence. Your real estate success starts here
           </Typography>

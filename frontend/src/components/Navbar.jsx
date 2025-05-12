@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  Typography,
-  Box,
-  IconButton,
-  Menu,
-  MenuItem,
-} from "@mui/material";
+import { AppBar, Toolbar, Button, Box, IconButton, Menu, MenuItem} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
+import logo from "../assets/Logo.png";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -18,23 +10,22 @@ export default function Navbar() {
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
 
- useEffect(() => {
-  const checkLogin = () => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  };
+  useEffect(() => {
+    const checkLogin = () => {
+      const token = localStorage.getItem("token");
+      setIsLoggedIn(!!token);
+    };
 
-  checkLogin();
+    checkLogin();
 
-  window.addEventListener("storage", checkLogin);
+    window.addEventListener("storage", checkLogin);
+    const interval = setInterval(checkLogin, 1000);
 
-  const interval = setInterval(checkLogin, 1000);
-
-  return () => {
-    window.removeEventListener("storage", checkLogin);
-    clearInterval(interval);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("storage", checkLogin);
+      clearInterval(interval);
+    };
+  }, []);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -59,24 +50,14 @@ export default function Navbar() {
       sx={{ bgcolor: "beige" }}
     >
       <Toolbar className="max-w-7xl mx-auto w-full flex justify-between">
-        {/* Left: Logo and Typography */}
+        {/* Left: Logo */}
         <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
-          <Typography
-            variant="h6"
-            component={RouterLink}
-            to="/"
-            sx={{
-              color: "brown",
-              fontWeight: "bold",
-              cursor: "pointer",
-              textDecoration: "none",
-            }}
-          >
-            CraftSpace
-          </Typography>
+          <RouterLink to="/">
+            <img src={logo} alt="CraftSpace Logo" style={{ height: 40 }} />
+          </RouterLink>
         </Box>
 
-        {/* Middle: Navigation Links - hidden on small screens */}
+        {/* Middle: Navigation Links - Hidden on small screens */}
         <Box
           sx={{
             display: { xs: "none", md: "flex" },
@@ -103,7 +84,7 @@ export default function Navbar() {
           </Button>
         </Box>
 
-        {/* Right: Buttons - hidden on small screens */}
+        {/* Right: Auth Buttons - Hidden on small screens */}
         <Box
           sx={{
             display: { xs: "none", md: "flex" },
@@ -154,7 +135,7 @@ export default function Navbar() {
                   px: 4,
                   py: 0.5,
                   textTransform: "none",
-                  "&:hover": { bgcolor: "darkbrown" },
+                  "&:hover": { bgcolor: "#4e342e" }, // Use hex or theme color
                 }}
               >
                 Join now
@@ -210,28 +191,26 @@ export default function Navbar() {
                 Logout
               </MenuItem>
             ) : (
-              [
+              <>
                 <MenuItem
-                  key="login"
                   component={RouterLink}
                   to="/login"
                   onClick={handleMenuClose}
                 >
                   Log In
-                </MenuItem>,
+                </MenuItem>
                 <MenuItem
-                  key="signup"
                   component={RouterLink}
                   to="/signup"
                   onClick={handleMenuClose}
                 >
                   Join now
-                </MenuItem>,
-              ]
+                </MenuItem>
+              </>
             )}
           </Menu>
         </Box>
       </Toolbar>
     </AppBar>
-  );
+  )
 }
