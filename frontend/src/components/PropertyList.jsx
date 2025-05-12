@@ -74,53 +74,82 @@ export default function PropertyList() {
       <Box
         sx={{
           display: 'flex',
+          flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
-          mb: 4,
+          mb: 2,
           background: '#fff',
           borderRadius: '0.5rem 0.5rem 0 0',
-          p: 2,
+          p: 1,
           boxShadow: 1,
         }}
       >
         {/* Left: Showing results */}
-        <Typography variant="body2" color="textSecondary" sx={{ flex: 1, textAlign: 'left' }}>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          sx={{ flex: '1 1 100%', textAlign: 'left', fontSize: { xs: '0.7rem', sm: '0.8rem' }, mb: { xs: 1, sm: 0 } }}
+        >
           Showing {(page - 1) * pageSize + 1}-{Math.min(page * pageSize, sortedProperties.length)} of {sortedProperties.length} results
         </Typography>
         {/* Center: Title */}
         <Typography
-          variant="h5"
+          variant="h6"
           sx={{
-            flex: 1,
+            flex: '1 1 100%',
             textAlign: 'center',
             fontWeight: 'bold',
             color: 'text.primary',
+            fontSize: { xs: '1rem', sm: '1.25rem' },
+            mb: { xs: 1, sm: 0 },
           }}
         >
           Property Listings
         </Typography>
         {/* Right: Filters */}
-        <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
+        <Box
+          sx={{
+            flex: '1 1 100%',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 1,
+            flexWrap: 'wrap',
+          }}
+        >
           <Select
             value={rentOrSaleFilter}
             onChange={handleRentOrSaleFilterChange}
             size="small"
             variant="outlined"
-            sx={{ minWidth: 120 }}
+            sx={{ minWidth: { xs: 90, sm: 120 }, fontSize: { xs: '0.7rem', sm: '0.875rem' } }}
+            displayEmpty
           >
-            <MenuItem value="sale">For Sale</MenuItem>
-            <MenuItem value="rent">For Rent</MenuItem>
+            <MenuItem value="" sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }}>
+              All
+            </MenuItem>
+            <MenuItem value="sale" sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }}>
+              For Sale
+            </MenuItem>
+            <MenuItem value="rent" sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }}>
+              For Rent
+            </MenuItem>
           </Select>
           <Select
             value={sort}
             onChange={handleSortChange}
             size="small"
             variant="outlined"
-            sx={{ minWidth: 170 }}
+            sx={{ minWidth: { xs: 120, sm: 170 }, fontSize: { xs: '0.7rem', sm: '0.875rem' } }}
           >
-            <MenuItem value="mostPopular">Most Popular</MenuItem>
-            <MenuItem value="priceLowHigh">Price: Low to High</MenuItem>
-            <MenuItem value="priceHighLow">Price: High to Low</MenuItem>
+            <MenuItem value="mostPopular" sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }}>
+              Most Popular
+            </MenuItem>
+            <MenuItem value="priceLowHigh" sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }}>
+              Price: Low to High
+            </MenuItem>
+            <MenuItem value="priceHighLow" sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }}>
+              Price: High to Low
+            </MenuItem>
           </Select>
         </Box>
       </Box>
