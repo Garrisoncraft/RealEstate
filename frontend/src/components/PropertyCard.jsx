@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function PropertyCard({ property }) {
   const navigate = useNavigate();
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const imageUrl = property.image && property.image.startsWith('/uploads')
     ? `${backendUrl}${property.image}`
     : property.image;
@@ -19,20 +19,7 @@ export default function PropertyCard({ property }) {
   return (
     <Card
       onClick={handleClick}
-      sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        borderRadius: 2,
-        boxShadow: 2,
-        transition: 'transform 0.2s ease-in-out, box-shadow 0.2s',
-        '&:hover': {
-          transform: 'scale(1.02)',
-          boxShadow: 4,
-        },
-        cursor: 'pointer',
-        p: 0,
-      }}
+      sx={{ mr: 2, height: '100%', display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: 2, transition: 'transform 0.2s ease-in-out, box-shadow 0.2s', '&:hover': {   transform: 'scale(1.02)',   boxShadow: 4, }, cursor: 'pointer' }}
     >
       <CardMedia
         component="img"

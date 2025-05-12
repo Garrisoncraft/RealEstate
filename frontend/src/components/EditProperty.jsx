@@ -27,7 +27,7 @@ export default function EditProperty() {
     }
     const fetchProperty = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/properties/get/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/properties/get/${id}`);
         if (!response.ok) {
           throw new Error('Property not found');
         }
@@ -83,7 +83,7 @@ export default function EditProperty() {
         formPayload.append('image', formData.image);
       }
 
-      const response = await fetch(`http://localhost:5000/properties/edit/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/properties/edit/${id}`, {
         method: 'PUT',
         headers: {
           'Authorization': 'Bearer ' + token,

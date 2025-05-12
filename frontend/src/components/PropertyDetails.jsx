@@ -45,7 +45,7 @@ export default function PropertyDetails() {
     const fetchProperty = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:5000/properties/get/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/properties/get/${id}`);
         if (!response.ok) throw new Error('Property not found');
         const data = await response.json();
         setProperty(data);
@@ -68,7 +68,7 @@ export default function PropertyDetails() {
     if (!token) return alert('You must be logged in to delete a property.');
 
     try {
-      const response = await fetch(`http://localhost:5000/properties/delete/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/properties/delete/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: 'Bearer ' + token,
@@ -137,9 +137,9 @@ export default function PropertyDetails() {
           <Box
             component="img"
             src={
-              property.image && property.image.startsWith('/uploads')
-                ? 'http://localhost:5000' + property.image
-                : property.image
+          property.image && property.image.startsWith('/uploads')
+            ? import.meta.env.VITE_BACKEND_URL + property.image
+            : property.image
             }
             alt={property.title}
             sx={{

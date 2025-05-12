@@ -59,7 +59,7 @@ export default function AddProperty() {
         formPayload.append('image', formData.image);
       }
 
-      const response = await fetch('http://localhost:5000/properties/add', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/properties/add`, {
         method: 'POST',
         headers: {
           'Authorization': 'Bearer ' + token,

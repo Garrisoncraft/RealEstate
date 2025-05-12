@@ -23,6 +23,7 @@ const CTASection = () => {
         backgroundColor: "#f9fafb",
         py: 2,
         display: "flex",
+        justifyContent: "center",
         alignItems: "center",
       }}
     >

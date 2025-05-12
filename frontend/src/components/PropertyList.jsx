@@ -14,7 +14,7 @@ export default function PropertyList() {
     const fetchProperties = async () => {
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:5000/properties/get');
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/properties/get`);
         const data = await response.json();
         setProperties(data);
       } catch (error) {
@@ -69,7 +69,7 @@ export default function PropertyList() {
   }
 
   return (
-    <Box className="max-w-7xl mx-auto px-4 py-8">
+    <Box  sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', minHeight: '100vh'}}>
       {/* Header Row */}
       <Box
         sx={{
@@ -128,7 +128,7 @@ export default function PropertyList() {
       <Grid mt={3} mb={3} container spacing={3}>
         {pagedProperties.map((property) => (
           <Grid item key={property.id} xs={12} sm={6} md={3} lg={3} sx={{ display: 'flex' }}>
-            <div style={{ flexGrow: 1 }}>
+            <div style={{ flexGrow: 1}}>
               <PropertyCard property={property} />
             </div>
           </Grid>
