@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormControl, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -72,6 +71,8 @@ export default function AddProperty() {
         setIsLoading(false);
         return;
       }
+      // Update image in formData with Cloudinary URL from backend response
+      setFormData(prev => ({ ...prev, image: data.image || null }));
       setIsLoading(false);
       navigate('/');
     } catch (err) {
@@ -208,7 +209,7 @@ export default function AddProperty() {
             onChange={handleChange}
           />
         </Button>
-        {formData.image && (
+        {formData.image && typeof formData.image === 'object' && (
           <Typography sx={{ mt: 1, fontStyle: 'italic', color: 'gray' }}>
             Selected file: {formData.image.name}
           </Typography>

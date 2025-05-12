@@ -2,25 +2,10 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 const authenticateToken = require('../middleware/authenticateToken');
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const upload = require('../utils/multer');
+const cloudinary = require('../utils/cloudinary');
+const streamifier = require('streamifier');
 
-// Set up multer storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, '../uploads');
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir);
-    }
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
-});
-const upload = multer({ storage: storage });
 
 // Get all properties
 router.get('/get', async (req, res) => {
@@ -46,15 +31,16 @@ router.get('/get/:id', async (req, res) => {
   }
 });
 
-// Add new property with image upload
 router.post('/add', authenticateToken, upload.single('image'), async (req, res) => {
   const { title, description, location, area, beds, baths, price, rentOrSale } = req.body;
   const userId = req.user.userId;
   let imagePath = null;
-  if (req.file) {
-    imagePath = '/uploads/' + req.file.filename;
-  }
+
   try {
+    if (req.file) {
+      imagePath = req.file.path;
+    }
+
     const [result] = await db.query(
       'INSERT INTO properties (title, description, location, area, beds, baths, price, rentOrSale, image, userId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [title, description, location, area, beds, baths, price, rentOrSale, imagePath, userId]
@@ -78,16 +64,17 @@ router.post('/add', authenticateToken, upload.single('image'), async (req, res) 
   }
 });
 
-// Edit property with image upload
 router.put('/edit/:id', authenticateToken, upload.single('image'), async (req, res) => {
   const { id } = req.params;
   const { title, location, description, area, beds, baths, price, rentOrSale } = req.body;
   const userId = req.user.userId;
   let imagePath = null;
-  if (req.file) {
-    imagePath = '/uploads/' + req.file.filename;
-  }
+
   try {
+    if (req.file) {
+      imagePath = req.file.path;
+    }
+
     // Check ownership
     const [rows] = await db.query('SELECT userId FROM properties WHERE id = ?', [id]);
     if (rows.length === 0) {
@@ -97,7 +84,7 @@ router.put('/edit/:id', authenticateToken, upload.single('image'), async (req, r
       return res.status(403).json({ error: 'Unauthorized' });
     }
     const queryParams = [title, location, description, area, beds, baths, price, rentOrSale];
-    let query = 'UPDATE properties SET title = ?, location = ?, area = ?, beds = ?, baths = ?, price = ?, rentOrSale = ?';
+    let query = 'UPDATE properties SET title = ?, location = ?, description = ?, area = ?, beds = ?, baths = ?, price = ?, rentOrSale = ?';
     if (imagePath) {
       query += ', image = ?';
       queryParams.push(imagePath);

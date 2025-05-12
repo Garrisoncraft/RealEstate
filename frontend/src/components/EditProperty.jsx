@@ -96,6 +96,8 @@ export default function EditProperty() {
         setIsLoading(false);
         return;
       }
+      // Update image in formData with Cloudinary URL from backend response
+      setFormData(prev => ({ ...prev, image: data.image || null }));
       setIsLoading(false);
       navigate('/');
     } catch (err) {
