@@ -1,0 +1,279 @@
+{
+  "info": {
+    "name": "RealEstateAPI",
+    "_postman_id": "12345678-abcd-efgh-ijkl-1234567890ab",
+    "description": "Postman collection for RealEstate API testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"TestPassword123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/signup",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "signup"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "pm.test(\"Response has success message\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql(\"User registered successfully\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"TestPassword123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "login"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response has token\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.token).to.exist;",
+              "    pm.environment.set(\"authToken\", jsonData.token);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get All Properties",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/properties/get",
+          "host": ["{{baseUrl}}"],
+          "path": ["properties", "get"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Property By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/properties/get/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["properties", "get", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Property",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{authToken}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "Beautiful House",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "A beautiful house with garden",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "New York",
+              "type": "text"
+            },
+            {
+              "key": "area",
+              "value": "2500",
+              "type": "text"
+            },
+            {
+              "key": "beds",
+              "value": "4",
+              "type": "text"
+            },
+            {
+              "key": "baths",
+              "value": "3",
+              "type": "text"
+            },
+            {
+              "key": "price",
+              "value": "500000",
+              "type": "text"
+            },
+            {
+              "key": "rentOrSale",
+              "value": "sale",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": ""
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/properties/add",
+          "host": ["{{baseUrl}}"],
+          "path": ["properties", "add"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit Property",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{authToken}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "Updated House Title",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "Updated description",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "New York",
+              "type": "text"
+            },
+            {
+              "key": "area",
+              "value": "2600",
+              "type": "text"
+            },
+            {
+              "key": "beds",
+              "value": "5",
+              "type": "text"
+            },
+            {
+              "key": "baths",
+              "value": "4",
+              "type": "text"
+            },
+            {
+              "key": "price",
+              "value": "550000",
+              "type": "text"
+            },
+            {
+              "key": "rentOrSale",
+              "value": "sale",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": ""
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/properties/edit/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["properties", "edit", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Property",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{authToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/properties/delete/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["properties", "delete", "1"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "authToken",
+      "value": ""
+    }
+  ]
+}
