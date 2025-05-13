@@ -23,7 +23,7 @@
         "url": {
           "raw": "{{baseUrl}}/auth/signup",
           "host": ["{{baseUrl}}"],
-          "path": ["auth", "signup"]
+          "path": ["signup"]
         }
       },
       "response": [],
@@ -62,7 +62,7 @@
         "url": {
           "raw": "{{baseUrl}}/auth/login",
           "host": ["{{baseUrl}}"],
-          "path": ["auth", "login"]
+          "path": ["login"]
         }
       },
       "response": [],
@@ -91,9 +91,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/properties/get",
+          "raw": "{{baseUrl}}/get",
           "host": ["{{baseUrl}}"],
-          "path": ["properties", "get"]
+          "path": ["get"]
         }
       },
       "response": []
@@ -104,9 +104,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/properties/get/1",
+          "raw": "{{baseUrl}}/get/1",
           "host": ["{{baseUrl}}"],
-          "path": ["properties", "get", "1"]
+          "path": ["get", "1"]
         }
       },
       "response": []
@@ -172,9 +172,9 @@
           ]
         },
         "url": {
-          "raw": "{{baseUrl}}/properties/add",
+          "raw": "{{baseUrl}}/add",
           "host": ["{{baseUrl}}"],
-          "path": ["properties", "add"]
+          "path": ["add"]
         }
       },
       "response": []
@@ -240,9 +240,9 @@
           ]
         },
         "url": {
-          "raw": "{{baseUrl}}/properties/edit/1",
+          "raw": "{{baseUrl}}/edit/1",
           "host": ["{{baseUrl}}"],
-          "path": ["properties", "edit", "1"]
+          "path": ["edit", "1"]
         }
       },
       "response": []
@@ -258,9 +258,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/properties/delete/1",
+          "raw": "{{baseUrl}}/delete/1",
           "host": ["{{baseUrl}}"],
-          "path": ["properties", "delete", "1"]
+          "path": ["delete", "1"]
         }
       },
       "response": []
